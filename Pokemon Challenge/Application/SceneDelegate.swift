@@ -14,7 +14,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: windowScene)
-        let rootScene = PokemonsViewController()
+        let rootScene = PokemonsFactory.makeModule()
         let navigation = UINavigationController(rootViewController: rootScene)
         
         window.rootViewController = navigation
