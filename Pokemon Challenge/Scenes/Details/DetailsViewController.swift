@@ -14,3 +14,14 @@ class DetailsViewController: UIViewController {
     }
     
 }
+
+extension DetailsViewController: ViewCode {
+    func setupViews() {
+        // TODO
+    }
+    
+    func setupConstrants() {
+        // TODO
+    }
+    
+}
