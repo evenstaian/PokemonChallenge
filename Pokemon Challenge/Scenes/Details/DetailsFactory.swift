@@ -8,7 +8,7 @@
 import UIKit
 
 enum DetailsFactory {
-    static func makeModule() -> UIViewController {
+    static func makeModule(pokemon: Species) -> UIViewController {
         let controller = DetailsViewController()
         return controller
     }

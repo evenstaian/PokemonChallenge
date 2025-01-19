@@ -8,17 +8,20 @@
 
 // To respect Dependency Injection I created this abstraction, to not implement concret class ViewModel
 protocol PokemonsViewmodeling: AnyObject {
-    func viewDidLoad()
     var onPokemonsUpdated: (([Species]) -> Void)? { get set }
+    func viewDidLoad()
+    func goToDetails(pokemon: Species)
 }
 
 class PokemonsViewModel: PokemonsViewmodeling {
     
     private let service: PokemonsServicing
+    private let coordinator: PokemonsCoordinating
     var onPokemonsUpdated: (([Species]) -> Void)?
     
-    init(service: PokemonsServicing){
+    init(service: PokemonsServicing, coordinator: PokemonsCoordinating){
         self.service = service
+        self.coordinator = coordinator
     }
     
     func viewDidLoad() {
@@ -30,5 +33,9 @@ class PokemonsViewModel: PokemonsViewmodeling {
                 print("Error fetching pokemons: \(error)")
             }
         }
+    }
+    
+    func goToDetails(pokemon: Species) {
+        self.coordinator.goToDetails(pokemon: pokemon)
     }
 }

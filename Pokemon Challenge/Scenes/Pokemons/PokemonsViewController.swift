@@ -50,8 +50,8 @@ class PokemonsViewController: UIViewController {
     }
     
     private func setupClicks() {
-        pokemonsCollectionDataSource.didClick = {
-            pokemon in print("Pokemon clicked: \(pokemon)")
+        pokemonsCollectionDataSource.didClick = { pokemon in
+            self.viewModel.goToDetails(pokemon: pokemon)
         }
     }
 }

@@ -11,8 +11,10 @@ enum PokemonsFactory {
     static func makeModule() -> UIViewController {
         let API = MockAPIRequests()
         let service = PokemonsService(API: API)
-        let viewModel = PokemonsViewModel(service: service)
+        let coordinator = PokemonsCoordinator()
+        let viewModel = PokemonsViewModel(service: service, coordinator: coordinator)
         let controller = PokemonsViewController(viewModel: viewModel)
+        coordinator.controller = controller
         return controller
     }
 }
