@@ -12,7 +12,16 @@ protocol PokemonsViewmodeling : AnyObject {
 }
 
 class PokemonsViewModel: PokemonsViewmodeling {
+    
+    private let service: PokemonsServicing
+    
+    init(service: PokemonsServicing){
+        self.service = service
+    }
+    
     func viewDidLoad() {
-        // TODO
+        service.getSpecies(offset: nil, limit: nil) { result in
+            print("## Result of Pokemons: \(result)")
+        }
     }
 }

@@ -23,6 +23,7 @@ class PokemonsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .blue
+        self.viewModel.viewDidLoad()
     }
 }
 
