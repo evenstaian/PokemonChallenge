@@ -7,18 +7,12 @@
 
 import Foundation
 
-enum NetworkError: Error {
-    case notFound
-    case noConnection
-    case unknown
-}
-
 protocol APIRequesting {
-    func getSpecies(offset: Int?, limit: Int?, completion: @escaping (Result<SpeciesResponse, NetworkError>) -> Void)
+    func getSpecies(offset: Int?, limit: Int?, completion: @escaping (Result<SpeciesResponse, NetworkErrors>) -> Void)
 }
 
 class MockAPIRequests: APIRequesting {
-    func getSpecies(offset: Int?, limit: Int?, completion: @escaping (Result<SpeciesResponse, NetworkError>) -> Void) {
+    func getSpecies(offset: Int?, limit: Int?, completion: @escaping (Result<SpeciesResponse, NetworkErrors>) -> Void) {
         let jsonString = """
         {
           "count": 1025,

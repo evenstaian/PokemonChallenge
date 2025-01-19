@@ -7,19 +7,9 @@
 
 import Foundation
 
-struct SpeciesResponse: Decodable {
-    let count: Int
-    let results: [Species]
-}
-
-struct Species: Decodable {
-    let name: String
-    let url: String
-}
-
 protocol PokemonsServicing {
     var API: APIRequesting {get set}
-    func getSpecies(offset: Int?, limit: Int?, completion: @escaping (Result<SpeciesResponse, NetworkError>) -> Void)
+    func getSpecies(offset: Int?, limit: Int?, completion: @escaping (Result<SpeciesResponse, NetworkErrors>) -> Void)
 }
 
 class PokemonsService: PokemonsServicing {
@@ -29,7 +19,7 @@ class PokemonsService: PokemonsServicing {
         self.API = API
     }
     
-    func getSpecies(offset: Int?, limit: Int?, completion: @escaping (Result<SpeciesResponse, NetworkError>) -> Void) {
+    func getSpecies(offset: Int?, limit: Int?, completion: @escaping (Result<SpeciesResponse, NetworkErrors>) -> Void) {
         self.API.getSpecies(offset: offset, limit: limit) { result in
             DispatchQueue.main.async {
                 completion(result)
