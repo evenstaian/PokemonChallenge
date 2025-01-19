@@ -20,7 +20,7 @@ extension DetailsViewController: ViewCode {
         // TODO
     }
     
-    func setupConstrants() {
+    func setupConstraints() {
         // TODO
     }
     

@@ -7,5 +7,5 @@
 
 protocol ViewCode {
     func setupViews()
-    func setupConstrants()
+    func setupConstraints()
 }

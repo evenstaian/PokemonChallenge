@@ -10,6 +10,21 @@ import UIKit
 class PokemonsViewController: UIViewController {
     
     private let viewModel: PokemonsViewModel
+    private let pokemonsCollectionDataSource = PokemonCollectionDataSource()
+    
+    private lazy var headerComponent: HeaderComponent = {
+        let header = HeaderComponent()
+        header.translatesAutoresizingMaskIntoConstraints = false
+        return header
+    }()
+    
+    private lazy var listComponent: ListComponent = {
+        let list = ListComponent()
+        list.collectionView.delegate = pokemonsCollectionDataSource
+        list.collectionView.dataSource = pokemonsCollectionDataSource
+        list.translatesAutoresizingMaskIntoConstraints = false
+        return list
+    }()
     
     init(viewModel: PokemonsViewModel){
         self.viewModel = viewModel
@@ -22,18 +37,42 @@ class PokemonsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .blue
+        setupViews()
+        setupConstraints()
+        setupClicks()
+        
+        viewModel.onPokemonsUpdated = { [weak self] pokemons in
+            self?.pokemonsCollectionDataSource.updatePokemons(pokemons)
+            self?.listComponent.collectionView.reloadData()
+        }
+        
         self.viewModel.viewDidLoad()
+    }
+    
+    private func setupClicks() {
+        pokemonsCollectionDataSource.didClick = {
+            pokemon in print("Pokemon clicked: \(pokemon)")
+        }
     }
 }
 
 extension PokemonsViewController: ViewCode {
     func setupViews() {
-        // TODO
+        view.backgroundColor = .white
+        view.addSubview(headerComponent)
+        view.addSubview(listComponent)
     }
     
-    func setupConstrants() {
-        // TODO
+    func setupConstraints() {
+        NSLayoutConstraint.activate([
+            headerComponent.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            headerComponent.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            headerComponent.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            listComponent.topAnchor.constraint(equalTo: headerComponent.bottomAnchor),
+            listComponent.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            listComponent.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            listComponent.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
-    
 }
