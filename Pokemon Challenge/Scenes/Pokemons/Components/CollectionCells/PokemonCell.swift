@@ -39,16 +39,15 @@ class PokemonCell: UICollectionViewCell {
     func configure(with pokemon: Species) {
         nameLabel.text = pokemon.name.capitalized
         if let id = pokemon.id {
+            let imageStore = ImageStore()
             let imageUrlString = "\(ApiConstants.imagesURL)\(id).png"
-            let imageURL = URL(string: imageUrlString)!
-            
-            URLSession.shared.dataTask(with: imageURL) { (data, response, error) in
-                if let data = data {
+            if let imageUrl = URL(string: imageUrlString) {
+                imageStore.fetch(for: imageUrl) { [weak self] imageData, _ in
                     DispatchQueue.main.async {
-                        self.imageView.image = UIImage(data: data)
+                        self?.imageView.image = imageData
                     }
                 }
-            }.resume()
+            }
         }
     }
 }

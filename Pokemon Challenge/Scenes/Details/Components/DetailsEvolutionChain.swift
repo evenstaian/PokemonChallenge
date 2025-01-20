@@ -68,16 +68,15 @@ class DetailsEvolutionChain: UIView {
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         if let id = Extracters.extractPokemonId(from: pokemon.url) {
+            let imageStore = ImageStore()
             let imageUrlString = "\(ApiConstants.imagesURL)\(id).png"
-            let imageURL = URL(string: imageUrlString)!
-            
-            URLSession.shared.dataTask(with: imageURL) { (data, response, error) in
-                if let data = data {
+            if let imageUrl = URL(string: imageUrlString) {
+                imageStore.fetch(for: imageUrl) { [weak self] imageData, _ in
                     DispatchQueue.main.async {
-                        imageView.image = UIImage(data: data)
+                        imageView.image = imageData
                     }
                 }
-            }.resume()
+            }
         }
         
         let nameLabel = UILabel()
