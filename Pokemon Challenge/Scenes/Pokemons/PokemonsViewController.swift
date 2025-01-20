@@ -29,6 +29,12 @@ class PokemonsViewController: UIViewController {
         return list
     }()
     
+    private lazy var authorComponent: AuthorComponent = {
+        let author = AuthorComponent()
+        author.translatesAutoresizingMaskIntoConstraints = false
+        return author
+    }()
+    
     init(viewModel: PokemonsViewmodeling){
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -91,6 +97,7 @@ extension PokemonsViewController: ViewCode {
         view.backgroundColor = .white
         view.addSubview(headerComponent)
         view.addSubview(listComponent)
+        view.addSubview(authorComponent)
     }
     
     func setupConstraints() {
@@ -102,19 +109,27 @@ extension PokemonsViewController: ViewCode {
             listComponent.topAnchor.constraint(equalTo: headerComponent.bottomAnchor),
             listComponent.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             listComponent.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            listComponent.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            listComponent.bottomAnchor.constraint(equalTo: authorComponent.topAnchor),
+            
+            authorComponent.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            authorComponent.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            authorComponent.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ]
         
         landscapeConstraints = [
             headerComponent.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             headerComponent.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            headerComponent.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            headerComponent.bottomAnchor.constraint(equalTo: authorComponent.topAnchor),
             headerComponent.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
             
             listComponent.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             listComponent.leadingAnchor.constraint(equalTo: headerComponent.trailingAnchor),
             listComponent.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            listComponent.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            listComponent.bottomAnchor.constraint(equalTo: authorComponent.topAnchor),
+            
+            authorComponent.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            authorComponent.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            authorComponent.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ]
         
         if let _ = portraitConstraints, let _ = landscapeConstraints {
