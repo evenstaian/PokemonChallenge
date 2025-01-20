@@ -79,6 +79,10 @@ extension ApiRequests {
     }
     
     func buildResponse<T: Decodable>(request: URLRequest, completion: @escaping (Result<T, NetworkErrors>) -> Void) {
+        if !NetworkReachability.isConnectedToNetwork() {
+            completion(.failure(.noConnection))
+        }
+        
         let dataTask = getSession().dataTask(with: request) { data, response, error in
             if error == nil {
                 

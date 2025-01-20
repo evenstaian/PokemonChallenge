@@ -50,6 +50,10 @@ class PokemonsViewController: UIViewController {
             self?.listComponent.refresher.endRefreshing()
         }
         
+        viewModel.onRequestError = { [weak self] errorMessage in
+            self?.showErrorAlert(message: errorMessage)
+        }
+        
         self.viewModel.viewDidLoad()
     }
     
@@ -116,5 +120,14 @@ extension PokemonsViewController: ViewCode {
         if let _ = portraitConstraints, let _ = landscapeConstraints {
             updateConstraintsWithOrientation(portraitConstraints!, landscapeConstraints!)
         }
+    }
+}
+
+extension PokemonsViewController {
+    func showErrorAlert(message: String) {
+        let alert = UIAlertController(title: "Oops!", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok, gotcha!", style: .default)
+        alert.addAction(okAction)
+        present(alert, animated: true)
     }
 }

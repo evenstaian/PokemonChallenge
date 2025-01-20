@@ -9,6 +9,7 @@
 // To respect Dependency Injection I created this abstraction, to not implement concret class ViewModel
 protocol PokemonsViewmodeling: AnyObject {
     var onPokemonsUpdated: (([Species]) -> Void)? { get set }
+    var onRequestError: ((String) -> Void)? { get set }
     func viewDidLoad()
     func getSpecies(offset: Int?, limit: Int?)
     func goToDetails(pokemon: Species)
@@ -23,6 +24,7 @@ class PokemonsViewModel: PokemonsViewmodeling {
     var limit = 20
     
     var onPokemonsUpdated: (([Species]) -> Void)?
+    var onRequestError: ((String) -> Void)?
     
     init(service: PokemonsServicing, coordinator: PokemonsCoordinating){
         self.service = service
@@ -46,6 +48,14 @@ class PokemonsViewModel: PokemonsViewmodeling {
                     self?.onPokemonsUpdated?(pokemons)
                 }
             case .failure(let error):
+                switch error {
+                case .noConnection:
+                    self?.onRequestError?("No internet connection. Please check your network and try again.")
+                case .notFound:
+                    self?.onRequestError?("Pokemon data not found. Please try again later.")
+                default:
+                    self?.onRequestError?("An unexpected error occurred. Please try again later.")
+                }
                 print("Error fetching pokemons: \(error)")
             }
         }
