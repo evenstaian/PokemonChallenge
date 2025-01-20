@@ -10,6 +10,8 @@ import UIKit
 class DetailsViewController: UIViewController {
     
     private let detailsViewModel: DetailsViewmodeling
+    private var portraitConstraints : [NSLayoutConstraint]?
+    private var landscapeConstraints : [NSLayoutConstraint]?
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -67,6 +69,16 @@ class DetailsViewController: UIViewController {
             self?.evolutionChainComponent.configure(with: evolutionChainDetails.chain)
         }
     }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        if let portraitConstraints = portraitConstraints, let landscapeConstraints = landscapeConstraints {
+            coordinator.animate { [weak self] _ in
+                self?.updateConstraintsWithOrientation(portraitConstraints, landscapeConstraints)
+            }
+        }
+    }
 }
 
 extension DetailsViewController: ViewCode {
@@ -82,7 +94,7 @@ extension DetailsViewController: ViewCode {
     }
     
     func setupConstraints() {
-        NSLayoutConstraint.activate([
+        portraitConstraints = [
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -107,6 +119,38 @@ extension DetailsViewController: ViewCode {
             evolutionChainComponent.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             evolutionChainComponent.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             evolutionChainComponent.heightAnchor.constraint(equalToConstant: 180)
-        ])
+        ]
+        
+        landscapeConstraints = [
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            
+            headerComponent.topAnchor.constraint(equalTo: contentView.topAnchor),
+            headerComponent.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            headerComponent.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.5),
+            
+            evolutionChainComponent.topAnchor.constraint(equalTo: headerComponent.bottomAnchor, constant: 16),
+            evolutionChainComponent.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            evolutionChainComponent.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.5),
+            evolutionChainComponent.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor),
+            evolutionChainComponent.heightAnchor.constraint(equalToConstant: 180),
+            
+            attributesComponent.topAnchor.constraint(equalTo: contentView.topAnchor),
+            attributesComponent.leadingAnchor.constraint(equalTo: headerComponent.trailingAnchor, constant: 16),
+            attributesComponent.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            attributesComponent.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ]
+        
+        if let _ = portraitConstraints, let _ = landscapeConstraints {
+            updateConstraintsWithOrientation(portraitConstraints!, landscapeConstraints!)
+        }
     }
 }
