@@ -6,20 +6,56 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		D679B26A2D3EE7FE00D82250 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D649D6E82D3D765200BAB56A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D649D6EF2D3D765200BAB56A;
+			remoteInfo = "Pokemon Challenge";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		D649D6F02D3D765200BAB56A /* Pokemon Challenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pokemon Challenge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D679B2662D3EE7FE00D82250 /* Pokemon Challenge Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Pokemon Challenge Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		D649D7122D3D7EE800BAB56A /* Exceptions for "Pokemon Challenge" folder in "Pokemon Challenge" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = D649D6EF2D3D765200BAB56A /* Pokemon Challenge */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		D649D6F22D3D765200BAB56A /* Pokemon Challenge */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				D649D7122D3D7EE800BAB56A /* Exceptions for "Pokemon Challenge" folder in "Pokemon Challenge" target */,
+			);
 			path = "Pokemon Challenge";
+			sourceTree = "<group>";
+		};
+		D679B2672D3EE7FE00D82250 /* Pokemon Challenge Tests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Pokemon Challenge Tests";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		D649D6ED2D3D765200BAB56A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D679B2632D3EE7FE00D82250 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -33,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				D649D6F22D3D765200BAB56A /* Pokemon Challenge */,
+				D679B2672D3EE7FE00D82250 /* Pokemon Challenge Tests */,
 				D649D6F12D3D765200BAB56A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				D649D6F02D3D765200BAB56A /* Pokemon Challenge.app */,
+				D679B2662D3EE7FE00D82250 /* Pokemon Challenge Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -70,6 +108,29 @@
 			productReference = D649D6F02D3D765200BAB56A /* Pokemon Challenge.app */;
 			productType = "com.apple.product-type.application";
 		};
+		D679B2652D3EE7FE00D82250 /* Pokemon Challenge Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D679B26C2D3EE7FE00D82250 /* Build configuration list for PBXNativeTarget "Pokemon Challenge Tests" */;
+			buildPhases = (
+				D679B2622D3EE7FE00D82250 /* Sources */,
+				D679B2632D3EE7FE00D82250 /* Frameworks */,
+				D679B2642D3EE7FE00D82250 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D679B26B2D3EE7FE00D82250 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				D679B2672D3EE7FE00D82250 /* Pokemon Challenge Tests */,
+			);
+			name = "Pokemon Challenge Tests";
+			packageProductDependencies = (
+			);
+			productName = "Pokemon Challenge Tests";
+			productReference = D679B2662D3EE7FE00D82250 /* Pokemon Challenge Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -82,6 +143,11 @@
 				TargetAttributes = {
 					D649D6EF2D3D765200BAB56A = {
 						CreatedOnToolsVersion = 16.1;
+						LastSwiftMigration = 1610;
+					};
+					D679B2652D3EE7FE00D82250 = {
+						CreatedOnToolsVersion = 16.1;
+						TestTargetID = D649D6EF2D3D765200BAB56A;
 					};
 				};
 			};
@@ -100,12 +166,20 @@
 			projectRoot = "";
 			targets = (
 				D649D6EF2D3D765200BAB56A /* Pokemon Challenge */,
+				D679B2652D3EE7FE00D82250 /* Pokemon Challenge Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		D649D6EE2D3D765200BAB56A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D679B2642D3EE7FE00D82250 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -122,7 +196,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D679B2622D3EE7FE00D82250 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D679B26B2D3EE7FE00D82250 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D649D6EF2D3D765200BAB56A /* Pokemon Challenge */;
+			targetProxy = D679B26A2D3EE7FE00D82250 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		D649D6FD2D3D765400BAB56A /* Debug */ = {
@@ -244,14 +333,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Pokemon Challenge/Pokemon_Challenge.entitlements";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Pokemon Challenge/Preview Content\"";
-				DEVELOPMENT_TEAM = NKZKJG4ZLT;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/Pokemon Challenge/Info.plist";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -270,10 +361,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "evenstaian.Pokemon-Challenge";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				XROS_DEPLOYMENT_TARGET = 2.1;
 			};
 			name = Debug;
@@ -283,14 +377,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Pokemon Challenge/Pokemon_Challenge.entitlements";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Pokemon Challenge/Preview Content\"";
-				DEVELOPMENT_TEAM = NKZKJG4ZLT;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/Pokemon Challenge/Info.plist";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -309,11 +405,54 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "evenstaian.Pokemon-Challenge";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				XROS_DEPLOYMENT_TARGET = 2.1;
+			};
+			name = Release;
+		};
+		D679B26D2D3EE7FE00D82250 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NKZKJG4ZLT;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "evenstaian.Pokemon-Challenge-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pokemon Challenge.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Pokemon Challenge";
+			};
+			name = Debug;
+		};
+		D679B26E2D3EE7FE00D82250 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NKZKJG4ZLT;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "evenstaian.Pokemon-Challenge-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pokemon Challenge.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Pokemon Challenge";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -334,6 +473,15 @@
 			buildConfigurations = (
 				D649D7002D3D765400BAB56A /* Debug */,
 				D649D7012D3D765400BAB56A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D679B26C2D3EE7FE00D82250 /* Build configuration list for PBXNativeTarget "Pokemon Challenge Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D679B26D2D3EE7FE00D82250 /* Debug */,
+				D679B26E2D3EE7FE00D82250 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
