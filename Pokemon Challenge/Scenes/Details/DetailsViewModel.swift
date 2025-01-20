@@ -26,7 +26,6 @@ class DetailsViewModel: DetailsViewmodeling {
     
     func viewDidLoad() {
         getSpeciesDetails(id: self.pokemon.id)
-        getEvolutionChain(id: self.pokemon.id)
     }
     
     func getSpeciesDetails(id: Int?) {
@@ -36,16 +35,17 @@ class DetailsViewModel: DetailsViewmodeling {
             switch result {
             case .success(let response):
                 self.onDetailsUpdated?(response)
+                self.getEvolutionChain(urlString: response.evolution_chain.url)
             case .failure(let error):
                 print("Error fetching pokemon details: \(error)")
             }
         }
     }
     
-    func getEvolutionChain(id: Int?) {
-        guard let id else { return }
+    func getEvolutionChain(urlString: String?) {
+        guard let urlString else { return }
         
-        self.service.getEvolutionChainDetails(id: id) { result in
+        self.service.getEvolutionChainDetails(urlString: urlString) { result in
             switch result {
             case .success(let response):
                 self.onEvolutionChainDetailsUpdated?(response)

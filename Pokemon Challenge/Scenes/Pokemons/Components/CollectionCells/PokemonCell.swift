@@ -39,7 +39,7 @@ class PokemonCell: UICollectionViewCell {
     func configure(with pokemon: Species) {
         nameLabel.text = pokemon.name.capitalized
         if let id = pokemon.id {
-            let imageUrlString = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(id).png"
+            let imageUrlString = "\(ApiConstants.imagesURL)\(id).png"
             let imageURL = URL(string: imageUrlString)!
             
             URLSession.shared.dataTask(with: imageURL) { (data, response, error) in

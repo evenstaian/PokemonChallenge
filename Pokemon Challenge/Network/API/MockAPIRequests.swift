@@ -7,12 +7,6 @@
 
 import Foundation
 
-protocol APIRequesting {
-    func getSpecies(offset: Int?, limit: Int?, completion: @escaping (Result<SpeciesResponse, NetworkErrors>) -> Void)
-    func getSpeciesDetails(id: Int, completion: @escaping (Result<SpeciesDetails, NetworkErrors>) -> Void)
-    func getEvolutionChain(id: Int, completion: @escaping (Result<EvolutionChainDetails, NetworkErrors>) -> Void)
-}
-
 class MockAPIRequests: APIRequesting {
     
     func getSpecies(offset: Int?, limit: Int?, completion: @escaping (Result<SpeciesResponse, NetworkErrors>) -> Void) {
@@ -393,7 +387,7 @@ class MockAPIRequests: APIRequesting {
         generateJSONDataCompletion(jsonString: jsonString, completion: completion)
     }
     
-    func getEvolutionChain(id: Int, completion: @escaping (Result<EvolutionChainDetails, NetworkErrors>) -> Void) {
+    func getEvolutionChain(urlString: String, completion: @escaping (Result<EvolutionChainDetails, NetworkErrors>) -> Void) {
         let jsonString = """
         {
           "baby_trigger_item": null,

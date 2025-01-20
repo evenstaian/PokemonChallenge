@@ -68,9 +68,7 @@ class DetailsEvolutionChain: UIView {
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         if let id = Extracters.extractPokemonId(from: pokemon.url) {
-            let imageUrlString = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(id).png"
-            
-            print(imageUrlString)
+            let imageUrlString = "\(ApiConstants.imagesURL)\(id).png"
             let imageURL = URL(string: imageUrlString)!
             
             URLSession.shared.dataTask(with: imageURL) { (data, response, error) in
