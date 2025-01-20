@@ -9,7 +9,10 @@ import UIKit
 
 enum DetailsFactory {
     static func makeModule(pokemon: Species) -> UIViewController {
-        let controller = DetailsViewController()
+        let API = MockAPIRequests()
+        let service = DetailsService(API: API)
+        let viewModel = DetailsViewModel(pokemon: pokemon, service: service)
+        let controller = DetailsViewController(detailsViewModel: viewModel)
         return controller
     }
 }

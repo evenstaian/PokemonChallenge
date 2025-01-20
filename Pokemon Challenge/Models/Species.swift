@@ -13,6 +13,7 @@ struct SpeciesResponse: Decodable {
 }
 
 struct Species: Decodable {
+    var id: Int?
     let name: String
     let url: String
 }

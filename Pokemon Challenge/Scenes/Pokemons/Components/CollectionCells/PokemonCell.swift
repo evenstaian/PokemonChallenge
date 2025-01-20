@@ -38,7 +38,7 @@ class PokemonCell: UICollectionViewCell {
     
     func configure(with pokemon: Species) {
         nameLabel.text = pokemon.name.capitalized
-        if let id = extractPokemonId(from: pokemon.url) {
+        if let id = pokemon.id {
             let imageUrlString = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(id).png"
             let imageURL = URL(string: imageUrlString)!
             
@@ -50,11 +50,6 @@ class PokemonCell: UICollectionViewCell {
                 }
             }.resume()
         }
-    }
-    
-    private func extractPokemonId(from url: String) -> String? {
-        let components = url.split(separator: "/")
-        return components.last.map(String.init)
     }
 }
 
