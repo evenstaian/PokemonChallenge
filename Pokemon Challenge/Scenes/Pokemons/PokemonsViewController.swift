@@ -44,6 +44,7 @@ class PokemonsViewController: UIViewController {
         viewModel.onPokemonsUpdated = { [weak self] pokemons in
             self?.pokemonsCollectionDataSource.updatePokemons(pokemons)
             self?.listComponent.collectionView.reloadData()
+            self?.listComponent.refresher.endRefreshing()
         }
         
         self.viewModel.viewDidLoad()
@@ -53,6 +54,12 @@ class PokemonsViewController: UIViewController {
         pokemonsCollectionDataSource.didClick = { pokemon in
             self.viewModel.goToDetails(pokemon: pokemon)
         }
+        
+        listComponent.refresher.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+    }
+    
+    @objc private func handleRefresh() {
+        viewModel.viewDidLoad()
     }
 }
 

@@ -8,6 +8,12 @@
 import UIKit
 
 class ListComponent: UIView {
+    lazy var refresher : UIRefreshControl = {
+        let view = UIRefreshControl()
+        view.tintColor = .green
+        return view
+    }()
+    
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 16
@@ -17,6 +23,7 @@ class ListComponent: UIView {
         collection.backgroundColor = .white
         collection.register(PokemonCell.self, forCellWithReuseIdentifier: "PokemonCell")
         collection.translatesAutoresizingMaskIntoConstraints = false
+        collection.addSubview(refresher)
         return collection
     }()
     
