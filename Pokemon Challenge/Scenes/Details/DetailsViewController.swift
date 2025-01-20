@@ -44,6 +44,10 @@ class DetailsViewController: UIViewController {
         self.detailsViewModel.onDetailsUpdated = { [weak self] details in
             self?.attributesComponent.configure(with: details)
         }
+        
+        self.detailsViewModel.onEvolutionChainDetailsUpdated = { [weak self] evolutionChainDetails in
+            print(evolutionChainDetails)
+        }
     }
     
 }

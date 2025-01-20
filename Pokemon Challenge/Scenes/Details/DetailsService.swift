@@ -9,6 +9,7 @@ import Foundation
 protocol DetailsServicing {
     var API: APIRequesting {get set}
     func getSpeciesDetails(id: Int, completion: @escaping (Result<SpeciesDetails, NetworkErrors>) -> Void)
+    func getEvolutionChainDetails(id: Int, completion: @escaping (Result<EvolutionChainDetails, NetworkErrors>) -> Void)
 }
 
 class DetailsService: DetailsServicing {
@@ -20,6 +21,14 @@ class DetailsService: DetailsServicing {
     
     func getSpeciesDetails(id: Int, completion: @escaping (Result<SpeciesDetails, NetworkErrors>) -> Void) {
         self.API.getSpeciesDetails(id: id) { result in
+            DispatchQueue.main.async {
+                completion(result)
+            }
+        }
+    }
+    
+    func getEvolutionChainDetails(id: Int, completion: @escaping (Result<EvolutionChainDetails, NetworkErrors>) -> Void) {
+        self.API.getEvolutionChain(id: id) { result in
             DispatchQueue.main.async {
                 completion(result)
             }
