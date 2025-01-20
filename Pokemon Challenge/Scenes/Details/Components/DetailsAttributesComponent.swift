@@ -10,6 +10,8 @@ import UIKit
 class DetailsAttributesComponent: UIView {
     private lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView()
+        scroll.showsVerticalScrollIndicator = true
+        scroll.alwaysBounceVertical = true
         scroll.translatesAutoresizingMaskIntoConstraints = false
         return scroll
     }()
@@ -44,7 +46,11 @@ class DetailsAttributesComponent: UIView {
     func configure(with details: SpeciesDetails) {
         contentStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
+        messageLabel.textColor = .systemGray
         contentStack.addArrangedSubview(messageLabel)
+        
+        let separator = createSeparator()
+        contentStack.addArrangedSubview(separator)
         
         addAttribute(title: "Base Happiness", value: "\(details.base_happiness)")
         addAttribute(title: "Capture Rate", value: "\(details.capture_rate)")
@@ -66,6 +72,14 @@ class DetailsAttributesComponent: UIView {
         }
     }
     
+    private func createSeparator() -> UIView {
+        let separator = UIView()
+        separator.backgroundColor = .systemGray5
+        separator.translatesAutoresizingMaskIntoConstraints = false
+        separator.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        return separator
+    }
+    
     private func addAttribute(title: String, value: String) {
         let container = UIView()
         container.translatesAutoresizingMaskIntoConstraints = false
@@ -73,14 +87,15 @@ class DetailsAttributesComponent: UIView {
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.font = .systemFont(ofSize: 14, weight: .medium)
-        titleLabel.textColor = .secondaryLabel
+        titleLabel.textColor = .systemGray
         titleLabel.text = title
         
         let valueLabel = UILabel()
         valueLabel.translatesAutoresizingMaskIntoConstraints = false
         valueLabel.font = .systemFont(ofSize: 16, weight: .semibold)
-        valueLabel.textColor = .label
+        valueLabel.textColor = .black
         valueLabel.text = value
+        valueLabel.numberOfLines = 0
         
         container.addSubview(titleLabel)
         container.addSubview(valueLabel)
@@ -102,8 +117,15 @@ class DetailsAttributesComponent: UIView {
 
 extension DetailsAttributesComponent: ViewCode {
     func setupViews() {
-        backgroundColor = .systemBackground
+        backgroundColor = .white
         layer.cornerRadius = 16
+        layer.borderWidth = 1
+        layer.borderColor = UIColor.systemGray5.cgColor
+        
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOffset = CGSize(width: 0, height: 2)
+        layer.shadowRadius = 6
+        layer.shadowOpacity = 0.1
         
         addSubview(scrollView)
         scrollView.addSubview(contentStack)
@@ -113,6 +135,7 @@ extension DetailsAttributesComponent: ViewCode {
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
+            
             scrollView.topAnchor.constraint(equalTo: topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -122,6 +145,7 @@ extension DetailsAttributesComponent: ViewCode {
             contentStack.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16),
             contentStack.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16),
             contentStack.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -16),
+            
             contentStack.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -32)
         ])
     }

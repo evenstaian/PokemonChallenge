@@ -14,17 +14,12 @@ class PokemonCollectionDataSource: NSObject, UICollectionViewDelegate, UICollect
     func updatePokemons(_ pokemons: [Species]) {
         self.pokemons = pokemons.map { pokemon in
             var updatedPokemon = pokemon
-            if let idString = extractPokemonId(from: pokemon.url),
+            if let idString = Extracters.extractPokemonId(from: pokemon.url),
                let id = Int(idString) {
                 updatedPokemon.id = id
             }
             return updatedPokemon
         }
-    }
-    
-    private func extractPokemonId(from url: String) -> String? {
-        let components = url.split(separator: "/")
-        return components.last.map(String.init)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
