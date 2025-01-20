@@ -9,6 +9,7 @@ import UIKit
 
 class PokemonCollectionDataSource: NSObject, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     var didClick: ((_ pokemon: Species) -> Void)?
+    var didListFinishScroll: (() -> Void)?
     var pokemons: [Species] = []
     
     func updatePokemons(_ pokemons: [Species]) {
@@ -47,6 +48,25 @@ class PokemonCollectionDataSource: NSObject, UICollectionViewDelegate, UICollect
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         didClick?(pokemons[indexPath.item])
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == pokemons.count - 1 {
+            didListFinishScroll?()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.bounds.size.width, height: 60)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionFooter {
+            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "FooterViewIdentifier", for: indexPath) as! ServiceMessageComponent
+            footerView.messageLabel.text = "Searching for more pokemons..."
+            return footerView
+        }
+        return UICollectionReusableView()
     }
 }
 

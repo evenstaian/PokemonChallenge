@@ -9,7 +9,7 @@ import UIKit
 
 class PokemonsViewController: UIViewController {
     
-    private let viewModel: PokemonsViewModel
+    private let viewModel: PokemonsViewmodeling
     private let pokemonsCollectionDataSource = PokemonCollectionDataSource()
     
     private lazy var headerComponent: HeaderComponent = {
@@ -26,7 +26,7 @@ class PokemonsViewController: UIViewController {
         return list
     }()
     
-    init(viewModel: PokemonsViewModel){
+    init(viewModel: PokemonsViewmodeling){
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -53,6 +53,12 @@ class PokemonsViewController: UIViewController {
     private func setupClicks() {
         pokemonsCollectionDataSource.didClick = { pokemon in
             self.viewModel.goToDetails(pokemon: pokemon)
+        }
+        
+        pokemonsCollectionDataSource.didListFinishScroll = {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                self.viewModel.getSpecies(offset: nil, limit: nil)
+            }
         }
         
         listComponent.refresher.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)

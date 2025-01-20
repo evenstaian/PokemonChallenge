@@ -22,6 +22,7 @@ class ListComponent: UIView {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.backgroundColor = .white
         collection.register(PokemonCell.self, forCellWithReuseIdentifier: "PokemonCell")
+        collection.register(ServiceMessageComponent.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "FooterViewIdentifier")
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.addSubview(refresher)
         return collection

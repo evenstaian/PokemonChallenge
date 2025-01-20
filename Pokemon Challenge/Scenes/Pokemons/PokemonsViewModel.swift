@@ -10,6 +10,7 @@
 protocol PokemonsViewmodeling: AnyObject {
     var onPokemonsUpdated: (([Species]) -> Void)? { get set }
     func viewDidLoad()
+    func getSpecies(offset: Int?, limit: Int?)
     func goToDetails(pokemon: Species)
 }
 
@@ -17,6 +18,10 @@ class PokemonsViewModel: PokemonsViewmodeling {
     
     private let service: PokemonsServicing
     private let coordinator: PokemonsCoordinating
+    var pokemons: [Species] = []
+    var offset = 20
+    var limit = 20
+    
     var onPokemonsUpdated: (([Species]) -> Void)?
     
     init(service: PokemonsServicing, coordinator: PokemonsCoordinating){
@@ -25,10 +30,21 @@ class PokemonsViewModel: PokemonsViewmodeling {
     }
     
     func viewDidLoad() {
-        service.getSpecies(offset: nil, limit: nil) { [weak self] result in
+        offset = 0
+        pokemons = []
+        getSpecies(offset: offset, limit: nil)
+    }
+    
+    func getSpecies(offset: Int?, limit: Int?) {
+        self.offset = offset ?? self.offset + self.limit
+        print(self.offset)
+        service.getSpecies(offset: self.offset, limit: self.limit) { [weak self] result in
             switch result {
             case .success(let response):
-                self?.onPokemonsUpdated?(response.results)
+                self?.pokemons.append(contentsOf: response.results)
+                if let pokemons = self?.pokemons {
+                    self?.onPokemonsUpdated?(pokemons)
+                }
             case .failure(let error):
                 print("Error fetching pokemons: \(error)")
             }
