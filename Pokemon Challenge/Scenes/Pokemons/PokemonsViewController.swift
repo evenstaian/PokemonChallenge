@@ -109,7 +109,7 @@ extension PokemonsViewController: ViewCode {
             headerComponent.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             headerComponent.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             headerComponent.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            headerComponent.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5), // Header ocupará 40% da largura
+            headerComponent.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
             
             listComponent.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             listComponent.leadingAnchor.constraint(equalTo: headerComponent.trailingAnchor),

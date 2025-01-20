@@ -112,6 +112,63 @@ final class PokemonsViewModelTests: XCTestCase {
         XCTAssertEqual(mockCoordinator.pokemonPassedToDetails?.name, "pikachu")
         XCTAssertEqual(mockCoordinator.pokemonPassedToDetails?.url, "test-url")
     }
+    
+    func test_getSpecies_whenNoConnectionError_shouldCallOnRequestErrorWithCorrectMessage() {
+        // Given
+        let expectation = XCTestExpectation(description: "Error callback called")
+        mockService.mockResult = .failure(.noConnection)
+        var receivedErrorMessage: String?
+        
+        sut.onRequestError = { message in
+            receivedErrorMessage = message
+            expectation.fulfill()
+        }
+        
+        // When
+        sut.getSpecies(offset: 0, limit: 20)
+        
+        // Then
+        wait(for: [expectation], timeout: 1.0)
+        XCTAssertEqual(receivedErrorMessage, "No internet connection. Please check your network and try again.")
+    }
+    
+    func test_getSpecies_whenNotFoundError_shouldCallOnRequestErrorWithCorrectMessage() {
+        // Given
+        let expectation = XCTestExpectation(description: "Error callback called")
+        mockService.mockResult = .failure(.notFound)
+        var receivedErrorMessage: String?
+        
+        sut.onRequestError = { message in
+            receivedErrorMessage = message
+            expectation.fulfill()
+        }
+        
+        // When
+        sut.getSpecies(offset: 0, limit: 20)
+        
+        // Then
+        wait(for: [expectation], timeout: 1.0)
+        XCTAssertEqual(receivedErrorMessage, "Pokemon data not found. Please try again later.")
+    }
+    
+    func test_getSpecies_whenUnknownError_shouldCallOnRequestErrorWithCorrectMessage() {
+        // Given
+        let expectation = XCTestExpectation(description: "Error callback called")
+        mockService.mockResult = .failure(.unknown)
+        var receivedErrorMessage: String?
+        
+        sut.onRequestError = { message in
+            receivedErrorMessage = message
+            expectation.fulfill()
+        }
+        
+        // When
+        sut.getSpecies(offset: 0, limit: 20)
+        
+        // Then
+        wait(for: [expectation], timeout: 1.0)
+        XCTAssertEqual(receivedErrorMessage, "An unexpected error occurred. Please try again later.")
+    }
 }
 
 // MARK: - Mocks
