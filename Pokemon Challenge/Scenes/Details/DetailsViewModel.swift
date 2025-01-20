@@ -19,7 +19,7 @@ class DetailsViewModel: DetailsViewmodeling {
     var onDetailsUpdated: ((SpeciesDetails) -> Void)?
     var onEvolutionChainDetailsUpdated: ((EvolutionChainDetails) -> Void)?
     
-    init(pokemon: Species, service: DetailsService){
+    init(pokemon: Species, service: DetailsServicing){
         self.pokemon = pokemon
         self.service = service
     }
